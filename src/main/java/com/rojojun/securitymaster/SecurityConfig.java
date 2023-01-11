@@ -81,6 +81,11 @@ public class SecurityConfig {
                 .rememberMeParameter("remeber")
                 .tokenValiditySeconds(3600)
                 .userDetailsService(userDetailsService);
+        http
+                .authorizeRequests()
+                .anyRequest().authenticated();
+        http
+                .formLogin();
         return http.build();
     }
 }
