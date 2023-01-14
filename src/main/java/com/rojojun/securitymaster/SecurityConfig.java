@@ -86,6 +86,15 @@ public class SecurityConfig {
                 .anyRequest().authenticated();
         http
                 .formLogin();
+        http
+                .sessionManagement()
+                .maximumSessions(1)
+                .maxSessionsPreventsLogin(true) // 방법 1: 동시 로그인 차단, 방법 2 :기존세션 만료 (default, false)
+        ;
+        http
+                .sessionManagement()
+                .sessionFixation().none() //해커에 침입에 대응 X
+        ;
         return http.build();
     }
 }
