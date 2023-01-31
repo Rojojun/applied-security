@@ -103,7 +103,9 @@ public class SecurityConfig {
         .and()
                 .sessionManagement()
                 .maximumSessions(1)
-                .maxSessionsPreventsLogin(true)
+                .maxSessionsPreventsLogin(true) //인증예외를 발생시켜서 인증을 실패하도록 만들어버림 첫번째 사용자만 로그인 되도록함
+                //.maxSessionsPreventsLogin(false) //세션만료를 시켜 두번째 사용자가 로그인 되도록함
+
         ;
         return http.build();
     }
