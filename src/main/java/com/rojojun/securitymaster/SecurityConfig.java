@@ -43,6 +43,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests()
+                .requestMatchers("/login").permitAll()
                 .requestMatchers("/user").hasRole("USER")
                 .requestMatchers("/admin/pay").hasRole("ADMIN")
                 .requestMatchers("/admin/**").hasAnyRole("ADMIN", "SYS")
@@ -72,6 +73,8 @@ public class SecurityConfig {
                         response.sendRedirect("/denied");
                     }
                 });
+
+        http.csrf();
 
         return http.build();
     }
